@@ -4,14 +4,14 @@ Recent changes: As of Elastalert 0.2.0, you must use Python 3.6. Python 2 will n
 [![Join the chat at https://gitter.im/Yelp/elastalert](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Yelp/elastalert?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## 修改内容
-> 基于Elastalert 0.2.0，自定义一下内容
+> 基于Elastalert 0.2.0，修改内容大致如下
 
 1. 修改报警及日志的日期格式为`%Y-%m-%d %H:%M:%S %Z`
 2. 集成钉钉报警（支持At、secret认证），参考`example_rules/example_frequency_lights8080.yaml`
 3. PercentageMatchRule，报警内容增加match_bucket_count字段
 4. FrequencyRule，报警内容增加doc_count字段
 5. requirements.txt改为elasticsearch==7.0.0
-6. 优化日志内容
+6. 优化日志
 
 ## ElastAlert - [Read the Docs](http://elastalert.readthedocs.org).
 ### Easy & Flexible Alerting With Elasticsearch

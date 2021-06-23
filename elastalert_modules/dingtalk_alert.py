@@ -1,13 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@author: xuyaoqiang
+@author: xuyaoqiang,lights8080
 @contact: xuyaoqiang@gmail.com
-@date: 2017-09-14 17:35
+@date: 2017-09-14 17:35,2021-06-23
 @version: 0.0.0
 @license:
 @copyright:
-
 """
 import json
 import requests
@@ -22,8 +21,6 @@ import hmac
 import hashlib
 import base64
 import urllib
-#import sys.path.append('/Users/lihaipeng/work/github/elastalert')
-#from util import elastalert_logger
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -61,7 +58,6 @@ class DingTalkAlerter(Alerter):
           payload["at"]["atMobiles"] = self.dingtalk_atMobiles
 
         url = self.dingtalk_webhook_url
-        #elastalert_logger.info('dingtalk_secret: %s' % (self.dingtalk_secret))
         if len(self.dingtalk_secret) > 0:
             timestamp = round(time.time() * 1000)
             secret_enc = bytes(self.dingtalk_secret, encoding='utf8')
@@ -71,8 +67,6 @@ class DingTalkAlerter(Alerter):
             sign = urllib.parse.quote(base64.b64encode(hmac_code))
             url = '{}&timestamp={}&sign={}'.format(self.dingtalk_webhook_url, timestamp, sign)
         
-        #elastalert_logger.info('url: %s' % (url))
-
         try:
             response = requests.post(url,
                         data=json.dumps(payload, cls=DateTimeEncoder),

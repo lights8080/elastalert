@@ -267,6 +267,8 @@ class FrequencyRule(RuleType):
         # middle or end of an add_data call and is used in subclasses
         if self.occurrences[key].count() >= self.rules['num_events']:
             event = self.occurrences[key].data[-1][0]
+            event.setdefault('doc_count', self.occurrences[key].count())
+            #elastalert_logger.info("----> %s -> %s" % (self.occurrences[key].data,event))
             if self.attach_related:
                 event['related_events'] = [data[0] for data in self.occurrences[key].data[:-1]]
             self.add_match(event)
@@ -1236,7 +1238,7 @@ class PercentageMatchRule(BaseAggregationRule):
             else:
                 match_percentage = (match_bucket_count * 1.0) / (total_count * 1.0) * 100
                 if self.percentage_violation(match_percentage):
-                    match = {self.rules['timestamp_field']: timestamp, 'percentage': match_percentage, 'denominator': total_count}
+                    match = {self.rules['timestamp_field']: timestamp, 'percentage': match_percentage, 'match_bucket_count': match_bucket_count, 'denominator': total_count}
                     if query_key is not None:
                         match[self.rules['query_key']] = query_key
                     self.add_match(match)

@@ -464,7 +464,7 @@ class ElastAlerter(object):
         self.thread_data.num_hits += res['count']
         lt = rule.get('use_local_time')
         elastalert_logger.info(
-            "Queried rule %s from %s to %s: %s hits" % (rule['name'], pretty_ts(starttime, lt), pretty_ts(endtime, lt), res['count'])
+            "Queried rule %s from %s to %s: %s hits count" % (rule['name'], pretty_ts(starttime, lt), pretty_ts(endtime, lt), res['count'])
         )
         return {endtime: res['count']}
 
@@ -580,7 +580,10 @@ class ElastAlerter(object):
             self.thread_data.num_hits += res['hits']['total']['value']
         else:
             self.thread_data.num_hits += res['hits']['total']
-
+        lt = rule.get('use_local_time')
+        elastalert_logger.info(
+            'Queried rule %s from %s to %s: %s aggregation' % (rule['name'], pretty_ts(starttime, lt), pretty_ts(endtime, lt), payload)
+        )
         return {endtime: payload}
 
     def remove_duplicate_events(self, data, rule):
@@ -1461,6 +1464,8 @@ class ElastAlerter(object):
         """
         if not matches:
             return
+
+        elastalert_logger.info('alert matches: %s' % (matches))
 
         if alert_time is None:
             alert_time = ts_now()

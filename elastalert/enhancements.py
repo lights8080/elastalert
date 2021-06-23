@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .util import pretty_ts
-
+from .util import elastalert_logger
 
 class BaseEnhancement(object):
     """ Enhancements take a match dictionary object and modify it in some way to

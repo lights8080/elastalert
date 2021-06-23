@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+from Github:https://github.com/xuyaoqiang/elastalert-dingtalk-plugin
 @author: xuyaoqiang,lights8080
 @contact: xuyaoqiang@gmail.com
 @date: 2017-09-14 17:35,2021-06-23
